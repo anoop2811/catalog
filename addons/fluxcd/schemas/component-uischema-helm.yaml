@@ -12,7 +12,7 @@
       - label: Oss
         value: oss
       - label: Oci
-        value: oci        
+        value: oci
 - jsonKey: url
   label: Repo URL
   uiType: HelmRepoSelect
