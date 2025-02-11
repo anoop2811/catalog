@@ -1,14 +1,24 @@
 apiVersion: core.oam.dev/v1beta1
 kind: Application
 metadata:
-  name: oci-app
+  name: helm-redis
   namespace: default
 spec:
   components:
-    - name: test-helm
+    - name: redis
       type: helm
       properties:
         repoType: "oci"
-        url: oci://ghcr.io/stefanprodan/charts
-        chart: podinfo
-        version: '6.1.*'
+        url: "oci://registry-1.docker.io/bitnamicharts"
+        chart: "redis"
+        values:
+          master:
+            persistence:
+              size: 16Gi
+          replica:
+            persistence:
+              size: 16Gi
+        upgradeCRD: true
+  policies:
+    - name: debug
+      type: debug
