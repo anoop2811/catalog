@@ -1,5 +1,6 @@
 import (
-	"vela/ql"
+	"vela/query"
+	"vela/kube"
 )
 
 parameter: {
@@ -8,7 +9,7 @@ parameter: {
 	cluster:   *"" | string
 }
 
-pod: ql.#Read & {
+pod: kube.#Read & {
 	value: {
 		apiVersion: "v1"
 		kind:       "Pod"
@@ -20,7 +21,7 @@ pod: ql.#Read & {
 	cluster: parameter.cluster
 }
 
-eventList: ql.#SearchEvents & {
+eventList: query.#SearchEvents & {
 	value: {
 		apiVersion: "v1"
 		kind:       "Pod"
@@ -29,7 +30,7 @@ eventList: ql.#SearchEvents & {
 	cluster: parameter.cluster
 }
 
-podMetrics: ql.#Read & {
+podMetrics: kube.#Read & {
 	cluster: parameter.cluster
 	value: {
 		apiVersion: "metrics.k8s.io/v1beta1"

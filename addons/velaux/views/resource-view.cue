@@ -1,5 +1,5 @@
 import (
-	"vela/ql"
+	"vela/kube"
 )
 
 parameter: {
@@ -35,25 +35,25 @@ schema: {
 	}
 }
 
-List: ql.#List & {
+List: kube.#List & {
 	resource: schema[parameter.type]
 	filter: {
 		namespace: parameter.namespace
 	}
-	cluster: parameter.cluster
+	cluster:    parameter.cluster
+	withStatus: true
 }
 
 status: {
-	if List.err == _|_ {
-		if len(List.list.items) == 0 {
-			error: "failed to list \(parameter.type) in namespace \(parameter.namespace)"
-		}
-		if len(List.list.items) != 0 {
-			list: List.list.items
-		}
+	if (List.err != _|_) {
+		error: List.err
 	}
 
-	if List.err != _|_ {
-		error: List.err
+	if (List.values != _|_) {
+		items: *([]) | List.values["items"]
+		if len(items) == 0 {
+			error: "failed to list \(parameter.type) in namespace \(parameter.namespace)"
+		}
+		list: items
 	}
 }

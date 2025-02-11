@@ -1,5 +1,5 @@
 import (
-	"vela/ql"
+	"vela/kube"
 )
 
 parameter: {
@@ -7,7 +7,7 @@ parameter: {
 	appNs?:   string
 }
 
-secretList: ql.#List & {
+secretList: kube.#List & {
 	resource: {
 		apiVersion: "v1"
 		kind:       "Secret"

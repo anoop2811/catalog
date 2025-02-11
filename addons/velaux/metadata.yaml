@@ -13,4 +13,4 @@ deployTo:
   runtimeCluster: false
 
 system:
-  vela: ">=v1.9.0"
+  vela: ">=v1.10.0"

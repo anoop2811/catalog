@@ -1,5 +1,5 @@
 import (
-	"vela/ql"
+	"vela/query"
 )
 
 parameter: {
@@ -7,7 +7,7 @@ parameter: {
 	appNs:   string
 }
 
-resources: ql.#ListResourcesInApp & {
+resources: query.#ListResourcesInApp & {
 	app: {
 		name:      parameter.appName
 		namespace: parameter.appNs

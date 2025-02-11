@@ -1,8 +1,8 @@
 import (
-	"vela/ql"
+	"vela/query"
 )
 
-collectLogs: ql.#CollectLogsInPod & {
+collectLogs: query.#CollectLogsInPod & {
 	cluster:   parameter.cluster
 	namespace: parameter.namespace
 	pod:       parameter.pod
@@ -16,7 +16,8 @@ collectLogs: ql.#CollectLogsInPod & {
 		limitBytes?:   parameter.limitBytes
 	}
 }
-status: collectLogs.outputs
+
+status: collectLogs
 
 parameter: {
 	// +usage=Specify the cluster of the pod

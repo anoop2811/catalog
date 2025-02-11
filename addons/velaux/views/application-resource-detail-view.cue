@@ -1,5 +1,5 @@
 import (
-	"vela/ql"
+	"vela/query"
 )
 
 parameter: {
@@ -9,7 +9,7 @@ parameter: {
 	kind:       string
 	apiVersion: string
 }
-response: ql.#Read & {
+response: query.#Read & {
 	value: {
 		apiVersion: parameter.apiVersion
 		kind:       parameter.kind

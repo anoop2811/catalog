@@ -1,5 +1,6 @@
 import (
-	"vela/ql"
+	"vela/query"
+	"vela/kube"
 )
 
 parameter: {
@@ -24,7 +25,7 @@ schema: {
 	}
 }
 
-pod: ql.#Read & {
+pod: kube.#Read & {
 	value: {
 		apiVersion: schema[parameter.type].apiVersion
 		kind:       schema[parameter.type].kind
@@ -36,11 +37,11 @@ pod: ql.#Read & {
 	cluster: parameter.cluster
 }
 
-eventList: ql.#SearchEvents & {
+eventList: query.#SearchEvents & {
 	value: {
 		apiVersion: schema[parameter.type].apiVersion
 		kind:       schema[parameter.type].kind
-		metadata: pod.value.metadata
+		metadata:   pod.value.metadata
 	}
 	cluster: parameter.cluster
 }
